@@ -11,6 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('contact', 'PagesController@getContact');
+Route::get('about', 'PagesController@getAbout');
+Route::get('/', 'PagesController@getIndex');
+
+Route::get('userpage', 'PagesController@getUserPage');
+Route::resource('posts','PostController');
+
+Route::post('/signup', [
+    'uses' => 'PagesController@postSignUp',
+    'as' => 'signup'
+]);
+
+Route::post('/signin', [
+    'uses' => 'PagesController@postSignIn',
+    'as' => 'signin'
+]);
+
