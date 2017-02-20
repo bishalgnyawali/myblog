@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Post;
 
 class PostController extends Controller
 {
@@ -38,6 +40,20 @@ posts     */
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'title' => 'required|unique:posts|max:255',
+            'body' => 'required',
+        ]);
+        $title=$request['title'];
+        $body=$request['body'];
+        $post= new Post;
+        $post->title=$title;
+        $post->body=$body;
+
+
+        $post->save();
+        return redirect()->route('posts.show',$post->id);
+
     }
 
     /**

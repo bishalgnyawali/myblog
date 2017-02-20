@@ -28,3 +28,7 @@ Route::post('/signin', [
     'as' => 'signin'
 ]);
 
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');

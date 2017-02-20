@@ -48,9 +48,9 @@ Class PagesController extends Controller{
 
         $user->save();
 
-        //Auth::login($user);
-
-        return redirect()->route('userpage');
+        Auth::login($user);
+        return view('userpage');
+        //return view('userpage');
     }
 
     public function postSignIn(Request $request)
@@ -61,8 +61,9 @@ Class PagesController extends Controller{
         ]);
 
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
-            return redirect()->route('userpage');
+            //return redirect()->route('userpage');//
+            return view('userpage');
         }
-        return redirect()->route('userpage');
+        return view('welcome');
     }
 }
