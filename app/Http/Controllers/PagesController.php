@@ -13,11 +13,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
+use App\Post;
 
 
 Class PagesController extends Controller{
     public function getIndex(){
         return view('welcome');
+    }
+    public function getLogout()
+    {
+        //
+        Auth::logout();
+        return redirect()->route('welcome');
     }
     public function getAbout(){
         return view('layouts/about');
@@ -26,7 +33,11 @@ Class PagesController extends Controller{
         return view('layouts/contact');
     }
     public function getUserPage(){
-        return view('userpage');
+
+        $posts=Post::orderBy('created_at', 'desc')->get();
+       // if(Auth::user()==$posts->user())
+            return view('userpage',['posts'=>$posts]);
+        //return redirect()->back();
 
     }
     public function postSignUp(Request $request)
@@ -49,7 +60,7 @@ Class PagesController extends Controller{
         $user->save();
 
         Auth::login($user);
-        return view('userpage');
+        return $this->getUserPage();
         //return view('userpage');
     }
 
@@ -62,8 +73,12 @@ Class PagesController extends Controller{
 
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
             //return redirect()->route('userpage');//
-            return view('userpage');
+            return redirect()->route('userpage');
         }
         return view('welcome');
     }
+
+
+
+
 }

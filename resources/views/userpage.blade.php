@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Contact Me!
+    User Page!
 @endsection
 
 @section('content')
@@ -20,38 +20,14 @@
             <div class="col-md-8">
 
                 <div class="post">
-                    <h3>Title of Post</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aperiam at debitis eius inventore
-                        ipsum iste magnam magni maiores natus, nisi, placeat quam sapiente! Ad facere nulla perferendis
-                        quas repellat?
-                    </p>
-                    <p><a href="#" class="btn btn-primary btn-lg">Read More</a></p>
-                </div>
 
-                <div class="post">
-                    <h3>Title of Post</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aperiam at debitis eius inventore
-                        ipsum iste magnam magni maiores natus, nisi, placeat quam sapiente! Ad facere nulla perferendis
-                        quas repellat?
-                    </p>
-                    <p><a href="#" class="btn btn-primary btn-lg">Read More</a></p>
-                </div>
+                    @foreach($posts as $post)
+                        <h3>{{$post->title}}</h3>
+                        <p>{{$post->body}}</p>
+                        <p><a href="#" class="btn btn-primary btn-lg">Read More</a></p>
+                        <p>created at {{$post->created_at}}</p>
+                    @endforeach
 
-                <div class="post">
-                    <h3>Title of Post</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aperiam at debitis eius inventore
-                        ipsum iste magnam magni maiores natus, nisi, placeat quam sapiente! Ad facere nulla perferendis
-                        quas repellat?
-                    </p>
-                    <p><a href="#" class="btn btn-primary btn-lg">Read More</a></p>
-                </div>
-                <div class="post">
-                    <h3>Title of Post</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aperiam at debitis eius inventore
-                        ipsum iste magnam magni maiores natus, nisi, placeat quam sapiente! Ad facere nulla perferendis
-                        quas repellat?
-                    </p>
-                    <p><a href="#" class="btn btn-primary btn-lg">Read More</a></p>
                 </div>
 
             </div>

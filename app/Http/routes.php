@@ -15,6 +15,11 @@ Route::get('contact', 'PagesController@getContact');
 Route::get('about', 'PagesController@getAbout');
 Route::get('/', 'PagesController@getIndex');
 
+Route::post('/logout', [
+    'uses' => 'PagesController@getLogout',
+    'as' => 'logout'
+]);
+
 Route::get('userpage', 'PagesController@getUserPage');
 Route::resource('posts','PostController');
 
@@ -28,6 +33,31 @@ Route::post('/signin', [
     'as' => 'signin'
 ]);
 
+Route::get('/signin', [
+    'uses' => 'PagesController@postSignIn',
+    'as' => 'signin'
+]);
+Route::post('/about', [
+    'uses' => 'PagesController@getAbout',
+    'as' => 'about'
+]);
+Route::post('/contact', [
+    'uses' => 'PagesController@getContact',
+    'as' => 'contact'
+]);
+
+Route::get('/userpage', [
+    'uses' => 'PagesController@getUserPage',
+    'as' => 'userpage',
+    'middleware' => 'auth'
+]);
+
+
+
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
 
 Route::auth();
 

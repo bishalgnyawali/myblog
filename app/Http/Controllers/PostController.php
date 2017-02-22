@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Post;
+
 
 class PostController extends Controller
 {
@@ -15,6 +16,9 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
 posts     */
+    public function __construct() {
+        $this->middleware('auth');
+    }
     public function index()
     {
         //
@@ -28,6 +32,7 @@ posts     */
     public function create()
     {
         //
+
         return view('layouts.create');
     }
 
@@ -65,6 +70,10 @@ posts     */
     public function show($id)
     {
         //
+        if (Auth::check()) {
+            $posts = Post::orderBy('created_at', 'desc')->get();
+            return view('userpage', ['posts' => $posts]);
+        }
     }
 
     /**
